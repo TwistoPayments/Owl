@@ -761,6 +761,10 @@ extension TableDirector: UITableViewDataSource, UITableViewDelegate {
 
 	@available(iOS 11.0, *)
 	public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard !indexPath.isEmpty else {
+            return nil
+        }
+        
 		let (model, adapter) = context(forItemAt: indexPath)
 		return adapter.dispatchEvent(.trailingSwipeActions, model: model, cell: nil, path: indexPath, params: nil) as? UISwipeActionsConfiguration
 	}
